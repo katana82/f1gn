@@ -57,8 +57,8 @@ body {
   }
   
   .card-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 cards per row */
     gap: 20px;
     justify-content: center;
   }
@@ -82,9 +82,9 @@ body {
   .news-card h3 {
     margin: 0 0 10px;
   }
-  
+
   .news-card a {
-    color: #ffd700;
+    color: white;
     text-decoration: none;
   }
   
@@ -98,12 +98,30 @@ body {
     margin-bottom: 10px;
   }
 
-  /* Limit markdown image size */
-main img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 1em 0;
-  border-radius: 6px;
+.news-card img {
+  width: 100%;              /* full width of its container */
+  aspect-ratio: 1 / 1;      /* makes it a square */
+  object-fit: cover;        /* ensures the image fills the square, crops if needed */
+  border-radius: 10px;      /* optional: rounded corners */
 }
+
+.latest-news {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 1200px; /* optional: limits how wide it stretches */
+}
+
+.latest-news h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+  /* Limit markdown image size */
+  main img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+    border-radius: 6px;
+  }
   
