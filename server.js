@@ -16,6 +16,8 @@ if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath);
 }
 
+//Start-Service ssh-agent
+
 // Homepage: list all posts with title, author, date
 app.get('/', (req, res) => {
   const files = fs.readdirSync(uploadPath);
