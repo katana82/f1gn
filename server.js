@@ -30,7 +30,8 @@ app.get('/', (req, res) => {
         title: data.title,
         slug: data.slug,
         author: data.author,
-        date: data.date
+        date: data.date,
+        image: data.image
       };
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date)); // newest first
@@ -46,7 +47,7 @@ app.get('/submit', (req, res) => {
 
 // Handle post submission
 app.post('/submit', (req, res) => {
-  const { title, text, author, date } = req.body;
+  const { title, text, author, date, image } = req.body;
   const slug = slugify(title, { lower: true, strict: true });
   const safeDate = date || new Date().toISOString(); // fallback to now if blank
 
@@ -55,7 +56,8 @@ app.post('/submit', (req, res) => {
     text,
     author,
     date: safeDate,
-    slug
+    slug,
+    image
   };
 
   const filePath = path.join(uploadPath, `${slug}.json`);
@@ -73,6 +75,7 @@ app.get('/post/:slug', (req, res) => {
       title: data.title,
       author: data.author,
       date: data.date,
+      image: data.image,
       htmlContent
     });
   } else {

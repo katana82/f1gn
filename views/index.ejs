@@ -18,6 +18,9 @@
         <div class="card-container">
           <% posts.forEach(post => { %>
             <div class="news-card">
+              <% if (post.image) { %>
+                <img src="<%= post.image %>" alt="<%= post.title %>" class="card-img" />
+              <% } %>
               <h3><a href="/post/<%= post.slug %>"><%= post.title %></a></h3>
               <p class="meta">By <%= post.author %> — <%= new Date(post.date).toLocaleDateString() %></p>
               <p><a href="/post/<%= post.slug %>">Read More →</a></p>
