@@ -98,6 +98,10 @@ body {
     margin-bottom: 10px;
   }
 
+  .meta {
+    font-style: italic;
+  }
+
 .news-card img {
   width: 100%;              /* full width of its container */
   aspect-ratio: 1 / 1;      /* makes it a square */
