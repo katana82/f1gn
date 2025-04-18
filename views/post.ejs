@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%= title %></title>
+  <title><%= title %> - F1 Global Newswire</title>
   <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 <body>
   <header>
-    <h1><%= title %></h1>
+    <h1>F1 Global Newswire</h1>
     <nav><a href="/">← Back to Home</a></nav>
   </header>
 
   <main>
-    <p><em>By <%= author %> on <%= new Date(date).toLocaleDateString() %></em></p>
-    <div><%- htmlContent %></div>
+    <article>
+      <h2><%= title %></h2>
+      <p class="meta">By <%= author %> — <%= new Date(date).toLocaleDateString() %></p>
+      <div><%- htmlContent %></div>
+    </article>
   </main>
 </body>
 </html>
