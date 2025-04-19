@@ -8,7 +8,7 @@ body {
   
   header {
     background-color: #e10600;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
   }
   
@@ -16,6 +16,13 @@ body {
     color: white;
     margin: 0;
     font-size: 2rem;
+    text-transform: uppercase;
+  }
+
+  header h4 {
+    color: rgb(177, 177, 177);
+    margin: 0;
+    font-size: 1rem;
     text-transform: uppercase;
   }
   
@@ -27,7 +34,7 @@ body {
   }
   
   main {
-    padding: 30px;
+    padding: 10px;
     max-width: 800px;
     margin: auto;
   }
@@ -111,13 +118,13 @@ body {
 
 .latest-news {
   text-align: center;
-  margin: 40px auto;
+  margin: 20px auto;
   max-width: 1200px; /* optional: limits how wide it stretches */
 }
 
 .latest-news h2 {
   font-size: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 20;
 }
 
   /* Limit markdown image size */

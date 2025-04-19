@@ -83,6 +83,6 @@ app.get('/post/:slug', (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(3000, '0.0.0.0', () => {
   console.log('F1 News site running at http://localhost:3000');
 });
