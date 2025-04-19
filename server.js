@@ -7,6 +7,10 @@ const marked = require('marked');
 const app = express();
 const uploadPath = path.join(__dirname, 'uploads');
 
+const Database = require('better-sqlite3');
+const db = new Database(path.join(__dirname, 'data', 'data.db'));
+
+
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
@@ -39,6 +43,26 @@ app.get('/', (req, res) => {
   res.render('index', { posts });
 });
 
+app.get('/race-results', (req, res) => {
+  const results = db.prepare(`
+    SELECT r.FinishingPos, r.DriverID, s.FirstName, s.LastName, r.TeamID, r.Points
+    FROM Races_Results r
+    LEFT JOIN Staff_BasicData s ON r.DriverID = s.StaffID
+    WHERE r.RaceID = 132
+    ORDER BY r.FinishingPos ASC
+  `).all();
+
+  const processed = results.map(row => ({
+    position: row.FinishingPos,
+    driver: `${row.FirstName?.split('_').pop()} ${row.LastName?.split('_').pop()}`,
+    team: row.TeamID,
+    points: row.Points
+  }));
+
+  res.render('race', { results: processed });
+});
+
+
 // GET: submission form page
 app.get('/submit', (req, res) => {
   res.render('submit');
@@ -65,6 +89,7 @@ app.post('/submit', (req, res) => {
 
   res.redirect(`/post/${slug}`);
 });
+
 // Individual post page
 app.get('/post/:slug', (req, res) => {
   const filePath = path.join(uploadPath, `${req.params.slug}.json`);
@@ -83,6 +108,6 @@ app.get('/post/:slug', (req, res) => {
   }
 });
 
-app.listen(3000, '0.0.0.0', () => {
+app.listen(3000, () => {
   console.log('F1 News site running at http://localhost:3000');
 });

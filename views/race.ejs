@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Race Results</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>Race 132 Results</h1>
+  <table>
+    <tr><th>Pos</th><th>Driver</th><th>Team ID</th><th>Points</th></tr>
+    <% results.forEach(r => { %>
+      <tr>
+        <td><%= r.position %></td>
+        <td><%= r.driver %></td>
+        <td><%= r.team %></td>
+        <td><%= r.points %></td>
+      </tr>
+    <% }) %>
+  </table>
+  <a href="/">← Back</a>
+</body>
+</html>
