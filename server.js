@@ -1,3 +1,5 @@
+const { analyzeFileToDatabase } = require('./tools/Parser.js');
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -44,20 +46,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/race-results', (req, res) => {
-  const results = db.prepare(`
-    SELECT r.FinishingPos, r.DriverID, s.FirstName, s.LastName, r.TeamID, r.Points
-    FROM Races_Results r
-    LEFT JOIN Staff_BasicData s ON r.DriverID = s.StaffID
-    WHERE r.RaceID = 132
-    ORDER BY r.FinishingPos ASC
-  `).all();
+  const fileInput = document.getElementById('fileInput');
+  fileInput.addEventListener('change', async (event) => {
+    const file = event.target.files[0];  // get the selected file
+  
+    try {
+      const { db, metadata } = await analyzeFileToDatabase(file);
+      console.log('Database:', db);
+      console.log('Metadata:', metadata);
+    } catch (err) {
+      console.error('Error analyzing file:', err);
+    }
+  })
 
-  const processed = results.map(row => ({
-    position: row.FinishingPos,
-    driver: `${row.FirstName?.split('_').pop()} ${row.LastName?.split('_').pop()}`,
-    team: row.TeamID,
-    points: row.Points
-  }));
 
   res.render('race', { results: processed });
 });
